@@ -27,9 +27,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
 
-        // const digiButton = document.getElementById('digi')
-        // const digiForm = document.getElementById('digi-form')
-        // const digiInput = document.getElementById('digi-input')
+        const digiButton = document.getElementById('digi')
+        const digiForm = document.getElementById('digi-form')
+        const digiInput = document.getElementById('digi-input')
 
         const addForm = document.querySelector('form');
         const nameInput = document.querySelector('input');
@@ -89,7 +89,7 @@
 
 
 
-            function putTheThingInTheView(res) {
+            function putTheThingInTheView2(res) {
             container.innerHTML = ''
             digiInput.value = ''
 
@@ -104,7 +104,7 @@
                     axios
                         .delete(`/api/digimon/${theIndexValue}`)
                         .then(res => {
-                            putTheThingInTheView(res)
+                            putTheThingInTheView2(res)
                         })
                 })
             })
@@ -116,7 +116,7 @@
             axios
                 .post('/api/digimon', { name: digiInput.value })
                 .then(res => {
-                    putTheThingInTheView(res)
+                    putTheThingInTheView2(res)
                 })
                 .catch(err => {
                     digiInput.value = ''
@@ -138,7 +138,7 @@
         axios
             .get('/api/digimon')
             .then(res => {
-                putTheThingInTheView(res)
+                putTheThingInTheView2(res)
             })
 
         addForm.addEventListener('submit', submitHandler)

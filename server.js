@@ -33,28 +33,28 @@ rollbar.log('Hello world!')
 //     rollbar.error("jared is defintely true")
 // }
 
-// app.post('/api/pokemon', (req, res) => {
-//     let {name} = req.body
+app.post('/api/digimon', (req, res) => {
+    let {name} = req.body
 
-//     const index = digimons.findIndex(digimon => {
-//         return digimon === name
-//     })
+    const index = digimons.findIndex(digimon => {
+        return digimon === name
+    })
 
-//     try {
-//         if (index === -1 && name !== '') {
-//             digimon.push(name)
-//             res.status(200).send(digimons)
-//         } else if (name === ''){
-//             res.status(400).send('You must enter a name.')
-//         } else {
-//             res.status(400).send('That digimon already exists.')
-//         }
-//     } catch (err) {
-//         console.log(err)
-//         rollbar.log(err)
+    try {
+        if (index === -1 && name !== '') {
+            digimon.push(name)
+            res.status(200).send(digimons)
+        } else if (name === ''){
+            res.status(400).send('You must enter a name.')
+        } else {
+            res.status(400).send('That digimon already exists.')
+        }
+    } catch (err) {
+        console.log(err)
+        rollbar.log(err)
        
-//     }
-//  })
+    }
+ })
  
 
 
