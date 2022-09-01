@@ -9,20 +9,16 @@ const cors = require('cors')
 app.use(express.json())
 app.use(cors())
 
-// // include and initialize the rollbar library with your access token
-// var Rollbar = require('rollbar')
-// var rollbar = new Rollbar({
-//   accessToken: ROLLBARTOKEN,
-//   captureUncaught: true,
-//   captureUnhandledRejections: true,
-// })
+// include and initialize the rollbar library with your access token
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: '816351de4caa4ecb858cd1f4d2df8ffe',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
 
-// // record a generic message and send it to Rollbar
-// rollbar.log('Hello world!')
-// rollbar.error("anError happened")
-// rollbar.info('This is some info')
-// rollbar.warning('The building is falling down')
-// rollbar.critical('the building fell down')
+// record a generic message and send it to Rollbar
+rollbar.log('Hello world!')
 
 const pokemons = ['Metagross', 'Blastoise', 'Sneasel']
 
