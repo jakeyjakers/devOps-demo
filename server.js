@@ -28,6 +28,10 @@ try {
  } catch(error){
     rollbar.error(error)
 }
+const jared = true;
+if (!jared){
+    rollbar.error("jared is defintely true")
+}
 
 app.post('/api/pokemon', (req, res) => {
     let {name} = req.body
