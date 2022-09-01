@@ -20,18 +20,18 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
 
-try {
+// try {
     
-   const jared = undefined.length
-    jared()
+//    const jared = undefined.length
+//     jared()
 
- } catch(error){
-    rollbar.error(error)
-}
-const jared = true;
-if (!jared){
-    rollbar.error("jared is defintely true")
-}
+//  } catch(error){
+//     rollbar.error(error)
+// }
+// const jared = true;
+// if (!jared){
+//     rollbar.error("jared is defintely true")
+// }
 
 app.post('/api/pokemon', (req, res) => {
     let {name} = req.body
