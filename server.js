@@ -35,7 +35,7 @@ app.get('/api/pokemon', (req, res) => {
     res.status(200).send(pokemons)
 })
 
-app.post('/api/students', (req, res) => {
+app.post('/api/pokemon', (req, res) => {
    let {name} = req.body
    
 
