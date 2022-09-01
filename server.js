@@ -24,45 +24,45 @@ rollbar.info('This is some info')
 rollbar.warning('The building is falling down')
 rollbar.critical('the building fell down')
 
-const students = ['Jimmy', 'Timothy', 'Jimothy']
+const pokemons = ['Metagross', 'Blastoise', 'Sneasel']
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/index.html'))
-    rollbar.log('student loaded')
+    
 })
 
-app.get('/api/students', (req, res) => {
-    res.status(200).send(students)
+app.get('/api/pokemon', (req, res) => {
+    res.status(200).send(pokemons)
 })
 
 app.post('/api/students', (req, res) => {
    let {name} = req.body
-   rollbar.log(name)
+   
 
-   const index = students.findIndex(student => {
-       return student === name
+   const index = pokemons.findIndex(pokemon => {
+       return pokemon === name
    })
 
    try {
        if (index === -1 && name !== '') {
-           students.push(name)
-           res.status(200).send(students)
+           pokemons.push(name)
+           res.status(200).send(pokemons)
        } else if (name === ''){
            res.status(400).send('You must enter a name.')
        } else {
-           res.status(400).send('That student already exists.')
+           res.status(400).send('That pokemon already exists.')
        }
    } catch (err) {
        console.log(err)
-       rollbar.warning('something went wrong with adding a student')
+      
    }
 })
 
-app.delete('/api/students/:index', (req, res) => {
+app.delete('/api/pokemon/:index', (req, res) => {
     const targetIndex = +req.params.index
     
-    students.splice(targetIndex, 1)
-    res.status(200).send(students)
+    pokemons.splice(targetIndex, 1)
+    res.status(200).send(pokemons)
 })
 
 const port = process.env.PORT || 5050
