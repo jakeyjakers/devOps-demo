@@ -16,8 +16,21 @@
     </form>
     <section></section>
 
+    <h1>Digimon List</h1>
+    <form id="digi-form">
+        <input type='text' placeholder='type a digimon' id="digi-input"/>
+        <button id="digi">add digimon</button>
+    </form>
+    <section></section>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
+
+        const digiButton = document.getElementById('digi')
+        const digiForm = document.getElementById('digi-form')
+        const digiInput = document.getElementById('digi-input')
+
         const addForm = document.querySelector('form');
         const nameInput = document.querySelector('input');
         const container = document.querySelector('section');
@@ -74,7 +87,62 @@
                 putTheThingInTheView(res)
             })
 
+
+
+            function putTheThingInTheView(res) {
+            container.innerHTML = ''
+            digiInput.value = ''
+
+            res.data.forEach((digiName, index) => {
+                container.innerHTML += `<p name=${index}>${digiName}</p>`
+            })
+
+            document.querySelectorAll('p').forEach(element => {
+                const theIndexValue = element.getAttribute('name');
+
+                element.addEventListener('click', () => {
+                    axios
+                        .delete(`/api/digimon/${theIndexValue}`)
+                        .then(res => {
+                            putTheThingInTheView(res)
+                        })
+                })
+            })
+        }
+
+        function submitHandlerDigi(evt) {
+            evt.preventDefault();
+
+            axios
+                .post('/api/digimon', { name: digiInput.value })
+                .then(res => {
+                    putTheThingInTheView(res)
+                })
+                .catch(err => {
+                    digiInput.value = ''
+
+                    const notif = document.createElement('aside')
+                    notif.innerHTML = `<p>${err.response.data}</p>
+                    <button class="close">close</button>`
+                    document.body.appendChild(notif)
+
+                    document.querySelectorAll('.close').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.target.parentNode.remove()
+                        })
+                    })
+                })
+        }
+
+        // get digimon list on initial load
+        axios
+            .get('/api/digimon')
+            .then(res => {
+                putTheThingInTheView(res)
+            })
+
         addForm.addEventListener('submit', submitHandler)
+        digiForm.addEventListener('submit', submitHandlerDigi)
     </script>
 </body>
 
